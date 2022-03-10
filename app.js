@@ -1,8 +1,27 @@
+let page = 1;
+const btnPrevious = document.getElementById("btnPrevious"); 
+const btnNext = document.getElementById("btnNext");
+
+
+btnNext.addEventListener("click", () => {
+    if(page < 1000){
+        page += 1;
+        loadMovies();
+    }
+});
+
+btnPrevious.addEventListener("click", () => {
+    if(page > 1) {
+        page -= 1;
+        loadMovies();
+    }
+})
+
 const loadMovies = async () => {
 
     try {
-        const response = await fetch('https://api.themoviedb.org/3/movie/popular?api_key=f17d3bf4c32da1495c2c468d6db6ee4e&language=es-ES');
-        console.log(response);
+        const response = await fetch(`https://api.themoviedb.org/3/movie/popular?api_key=f17d3bf4c32da1495c2c468d6db6ee4e&language=es-ES&page=${page}`);
+        //console.log(response);
 
         //Checking whether the response is correct
         if (response.status === 200 ){
